@@ -1,32 +1,35 @@
-import { useState } from 'react';
 import {
   useDeleteContactMutation,
   useEditContactMutation,
 } from '../../redux/contacts/contacts-reducer';
-import { IoTrashBinOutline } from 'react-icons/io5';
+import { useState } from 'react';
+import { ImBin2 } from 'react-icons/im';
+// import { IoTrashBinOutline } from 'react-icons/io5';
+import { ImPencil } from 'react-icons/im';
+import { ImCheckmark } from 'react-icons/im';
 import { BallTriangle } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 import styles from './ContactsList.module.css';
 
-export default function ContactsListItem({ id, name, phoneNumber }) {
-  const [changingContact, setChangingContact] = useState(false);
+export default function ContactsListItem({ contactId, name, phoneNumber }) {
+  const [change, setChange] = useState(false);
   const [contactName, setContactName] = useState(name);
-  const [contactPhone, setContactPhone] = useState(phoneNumber);
+  const [contactNumber, setContactNumber] = useState(phoneNumber);
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
   const [editContact, { isLoading: isEditing }] = useEditContactMutation();
 
   const editHandler = () => {
     editContact({
-      changedContact: { name: contactName, number: contactPhone },
-      id,
+      changedContact: { name: contactName, number: contactNumber },
+      contactId,
     });
-    setChangingContact(false);
+    setChange(false);
   };
 
   return (
     <>
       <li className={styles.item}>
-        {!changingContact ? (
+        {!change ? (
           <>
             <span className={styles.info}>
               {name}: {phoneNumber}
@@ -34,28 +37,31 @@ export default function ContactsListItem({ id, name, phoneNumber }) {
             <button
               className={styles.button}
               type="button"
-              onClick={() => setChangingContact(true)}
+              onClick={() => setChange(true)}
             >
               {isEditing ? (
                 <BallTriangle height="20" width="40" color="beige" />
               ) : (
-                <p>Edit</p>
+                <ImPencil />
               )}
             </button>
           </>
         ) : (
           <>
             <input
+              name="name"
               value={contactName}
               onChange={e => setContactName(e.target.value)}
             />
             <input
-              value={contactPhone}
+              type="tel"
+              name="phone"
+              value={contactNumber}
               autoFocus
-              onChange={e => setContactPhone(e.target.value)}
+              onChange={e => setContactNumber(e.target.value)}
             />
             <button type="button" onClick={() => editHandler()}>
-              Done
+              <ImCheckmark />
             </button>
           </>
         )}
@@ -63,43 +69,21 @@ export default function ContactsListItem({ id, name, phoneNumber }) {
         <button
           className={styles.button}
           type="button"
-          onClick={() => deleteContact(id)}
+          onClick={() => deleteContact(contactId)}
         >
           {isDeleting ? (
             <BallTriangle height="20" width="40" color="beige" />
           ) : (
-            <IoTrashBinOutline />
+            <ImBin2 />
           )}
         </button>
       </li>
-      {/* <li className={styles.item}>
-        <span className={styles.info}>
-          {name}: {phoneNumber}
-        </span>
-        {isLoading ? (
-          <button
-            className={styles.button}
-            type="button"
-            onClick={() => deleteContact(id)}
-          >
-            <BallTriangle height="20" width="40" color="beige" />
-          </button>
-        ) : (
-          <button
-            className={styles.button}
-            type="button"
-            onClick={() => deleteContact(id)}
-          >
-            <IoTrashBinOutline />
-          </button>
-        )}
-      </li> */}
     </>
   );
 }
 
 ContactsListItem.propTypes = {
-  id: PropTypes.string.isRequired,
+  contactId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   phoneNumber: PropTypes.string.isRequired,
 };

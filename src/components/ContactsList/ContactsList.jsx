@@ -22,7 +22,7 @@ export default function ContactList() {
           filteredContacts.map(({ id, name, number }) => (
             <ContactsListItem
               key={id}
-              id={id}
+              contactId={id}
               name={name}
               phoneNumber={number}
             />

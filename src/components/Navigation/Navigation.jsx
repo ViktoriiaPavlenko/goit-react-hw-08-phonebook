@@ -1,26 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
-const styles = {
-  link: {
-    display: 'inline-block',
-    textDecoration: 'none',
-    padding: 12,
-    fontWeight: 700,
-    color: '#2A363B',
-  },
-  activeLink: {
-    color: '#E84A5F',
-  },
-};
+import styles from './Navigation.module.css';
 
 const Navigation = () => (
   <nav>
-    <NavLink to="/" style={styles.link}>
+    <NavLink to="/" className={styles.link}>
       Home
     </NavLink>
 
-    <NavLink to="/contacts" style={styles.link}>
+    <NavLink to="/contacts" className={styles.link}>
       Contacts
     </NavLink>
   </nav>

@@ -9,7 +9,7 @@ export default function Filter() {
 
   return (
     <label className={styles.label}>
-      Find contacts
+      Find contacts by name
       <input
         className={styles.input}
         type="text"

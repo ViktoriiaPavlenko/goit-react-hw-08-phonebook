@@ -15,7 +15,6 @@ import storage from 'redux-persist/lib/storage';
 import { authApi } from './auth/auth-reducer';
 import { contactsApi, filterReducer } from './contacts/contacts-reducer';
 import { authSlice } from './auth/auth-slice';
-import { ErrorLogger } from './ErrorMiddleware';
 
 const authPersistConfig = {
   key: 'auth',
@@ -38,10 +37,8 @@ export const store = configureStore({
     }),
     contactsApi.middleware,
     authApi.middleware,
-    ErrorLogger,
   ],
 });
 
-export const persistor = persistStore(store);
-
 setupListeners(store.dispatch);
+export const persistor = persistStore(store);

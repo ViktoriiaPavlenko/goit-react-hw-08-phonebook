@@ -11,21 +11,21 @@ import styles from './ContactsForm.module.css';
 
 export default function ContactsForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const { data: contacts } = useFetchContactsQuery();
   const [saveContact, { isLoading }] = useSaveContactMutation();
 
   const handleSubmit = e => {
     e.preventDefault();
-    const contact = { name, phone };
+    const contact = { name, number };
 
     const getNameExistence = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
 
     const getNumberExistence = contacts.find(
-      contact => contact.phone === phone,
+      contact => contact.number === number,
     );
 
     if (getNameExistence) {
@@ -34,7 +34,7 @@ export default function ContactsForm() {
       return;
     }
     if (getNumberExistence) {
-      error(phone);
+      error(number);
       reset();
       return;
     }
@@ -50,7 +50,7 @@ export default function ContactsForm() {
         setName(value);
         break;
       case 'phone':
-        setPhone(value);
+        setNumber(value);
         break;
       default:
         return;
@@ -59,7 +59,7 @@ export default function ContactsForm() {
 
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   return (
@@ -84,7 +84,7 @@ export default function ContactsForm() {
           className={styles.input}
           type="tel"
           name="phone"
-          value={phone}
+          value={number}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required

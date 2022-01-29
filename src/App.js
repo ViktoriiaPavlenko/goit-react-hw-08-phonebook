@@ -2,12 +2,13 @@ import { useSelector } from 'react-redux';
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 // import Loader from 'react-loader-spinner';
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AppBar from './components/AppBar/AppBar.jsx';
 import RequireAuth from './components/RequireAuth/RequireAuth.jsx';
 import PublicRoute from './components/PublicRoute/PublicRoute.jsx';
 import { getUserStatus } from './redux/auth/auth-selectors';
+import styles from './App.module.css';
 
 const HomeView = lazy(() =>
   import('./views/HomeView' /* webpackChunkName: "home" */),
@@ -30,7 +31,7 @@ export default function App() {
       <Suspense
         fallback={
           <>
-            <p>Loading...</p>
+            <p className={styles.loading}>Loading...</p>
           </>
         }
       >
@@ -82,6 +83,7 @@ export default function App() {
           {/* </Route> */}
         </Routes>
       </Suspense>
+      <ToastContainer autoClose={3000} theme={'colored'} />
     </>
   );
 }

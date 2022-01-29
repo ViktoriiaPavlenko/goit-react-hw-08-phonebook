@@ -4,15 +4,7 @@ import UserMenu from '../UserMenu/UserMenu';
 import AuthNav from '../AuthNav/AuthNav';
 import { getUserStatus, getToken } from '../../redux/auth/auth-selectors';
 import { useFetchCurrentUserQuery } from '../../redux/auth/auth-reducer';
-
-const styles = {
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottom: '1px solid #2A363B',
-  },
-};
+import styles from './AppBar.module.css';
 
 export default function AppBar() {
   const isLoggedIn = useSelector(getUserStatus);
@@ -23,7 +15,7 @@ export default function AppBar() {
   return (
     <>
       {!isLoading && (
-        <header style={styles.header}>
+        <header className={styles.header}>
           <Navigation />
           {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </header>
