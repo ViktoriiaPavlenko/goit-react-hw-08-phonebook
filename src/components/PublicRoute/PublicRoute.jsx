@@ -1,6 +1,6 @@
-import { getUserStatus } from '../../redux/auth/auth-selectors';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { getUserStatus } from '../../redux/auth/auth-selectors';
 
 export default function PublicRoute({
   children,

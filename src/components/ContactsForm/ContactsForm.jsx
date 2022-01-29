@@ -16,7 +16,7 @@ export default function ContactsForm() {
   const { data: contacts } = useFetchContactsQuery();
   const [saveContact, { isLoading }] = useSaveContactMutation();
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
     const contact = { name, phone };
 

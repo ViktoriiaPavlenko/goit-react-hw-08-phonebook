@@ -19,12 +19,12 @@ export default function ContactList() {
     <>
       <ul className={styles.list}>
         {data &&
-          filteredContacts.map(({ id, name, phone }) => (
+          filteredContacts.map(({ id, name, number }) => (
             <ContactsListItem
               key={id}
               id={id}
               name={name}
-              phoneNumber={phone}
+              phoneNumber={number}
             />
           ))}
       </ul>
