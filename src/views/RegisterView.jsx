@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRegisterUserMutation } from '../redux/auth/auth-reducer';
+import styles from './Views.module.css';
 
 export default function RegisterView() {
   const [name, setName] = useState('');
@@ -38,10 +39,11 @@ export default function RegisterView() {
     <div>
       <h1>Register form</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.label}>
           Name
           <input
+            className={styles.input}
             type="text"
             name="name"
             value={name}
@@ -50,9 +52,10 @@ export default function RegisterView() {
           />
         </label>
 
-        <label>
+        <label className={styles.label}>
           E-mail
           <input
+            className={styles.input}
             type="email"
             name="email"
             value={email}
@@ -61,9 +64,10 @@ export default function RegisterView() {
           />
         </label>
 
-        <label>
+        <label className={styles.label}>
           Password
           <input
+            className={styles.input}
             type="password"
             name="password"
             value={password}
@@ -72,8 +76,10 @@ export default function RegisterView() {
           />
         </label>
 
-        <button type="submit">Register</button>
-        <p>
+        <button className={styles.button} type="submit">
+          Register
+        </button>
+        <p className={styles.text}>
           Already have an account?<Link to="/login">Log in</Link>
         </p>
       </form>

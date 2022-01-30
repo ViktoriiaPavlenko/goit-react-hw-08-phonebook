@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useLoginUserMutation } from '../redux/auth/auth-reducer';
+import { Link } from 'react-router-dom';
+import styles from './Views.module.css';
 
 export default function LoginView() {
   const [email, setEmail] = useState('');
@@ -33,10 +35,11 @@ export default function LoginView() {
     <div>
       <h1>Log in</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <label className={styles.label}>
           E-mail
           <input
+            className={styles.input}
             type="email"
             name="email"
             value={email}
@@ -45,9 +48,10 @@ export default function LoginView() {
           />
         </label>
 
-        <label>
+        <label className={styles.label}>
           Password
           <input
+            className={styles.input}
             type="password"
             name="password"
             value={password}
@@ -56,7 +60,13 @@ export default function LoginView() {
           />
         </label>
 
-        <button type="submit">Log in</button>
+        <button className={styles.button} type="submit">
+          Log in
+        </button>
+        <p className={styles.text}>
+          If you don`t have an account, please{' '}
+          <Link to="/register">register</Link>
+        </p>
       </form>
     </div>
   );

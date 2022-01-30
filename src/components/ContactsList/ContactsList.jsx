@@ -6,7 +6,7 @@ import styles from './ContactsList.module.css';
 
 export default function ContactList() {
   const filter = useSelector(getFilter);
-  const { data } = useFetchContactsQuery();
+  const { data, error } = useFetchContactsQuery();
 
   const getFilteredContacts = contacts =>
     contacts.filter(({ name }) =>
@@ -17,17 +17,21 @@ export default function ContactList() {
 
   return (
     <>
-      <ul className={styles.list}>
-        {data &&
-          filteredContacts.map(({ id, name, number }) => (
-            <ContactsListItem
-              key={id}
-              contactId={id}
-              name={name}
-              phoneNumber={number}
-            />
-          ))}
-      </ul>
+      {error || (filteredContacts && filteredContacts.length === 0) ? (
+        <div className={styles.warning}>You have no contacts!</div>
+      ) : (
+        <ul className={styles.list}>
+          {data &&
+            filteredContacts.map(({ id, name, number }) => (
+              <ContactsListItem
+                key={id}
+                contactId={id}
+                name={name}
+                phoneNumber={number}
+              />
+            ))}
+        </ul>
+      )}
     </>
   );
 }

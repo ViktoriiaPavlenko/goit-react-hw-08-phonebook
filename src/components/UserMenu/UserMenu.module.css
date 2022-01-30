@@ -2,20 +2,14 @@
   display: flex;
   align-items: center;
 }
-.avatar {
-  margin-right: 4px;
-}
 .name {
   font-weight: 900;
   margin-right: 12px;
 }
 .button {
   text-align: center;
-  /* width: 50px; */
   color: beige;
   padding: 5px;
-  /* margin-bottom: 10px;
-  margin-left: 10px; */
   margin-right: 10px;
   outline: none;
   border: none;

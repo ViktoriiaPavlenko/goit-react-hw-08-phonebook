@@ -1,4 +1,8 @@
-form,
+.title {
+  margin-right: 100px;
+  margin-left: 100px;
+}
+.form,
 .label {
   display: flex;
   flex-direction: column;
@@ -34,4 +38,8 @@ form,
 .button:focus {
   box-shadow: 4px 4px 8px 0px rgba(199, 25, 155, 0.2);
   transform: scale(1.04);
+}
+.text {
+  font-size: 32px;
+  font-weight: 700;
 }

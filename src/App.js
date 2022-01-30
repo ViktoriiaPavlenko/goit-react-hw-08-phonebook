@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import Loader from 'react-loader-spinner';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppBar from './components/AppBar/AppBar.jsx';
@@ -35,14 +34,7 @@ export default function App() {
           </>
         }
       >
-        {/* <Routes>
-          <Route path="/" element={<HomeView />} />
-          <Route path="/register" element={<RegisterView />} />
-          <Route path="/login" element={<LoginView />} />
-          <Route path="/contacts" element={<ContactsView />} />
-        </Routes> */}
         <Routes>
-          {/* <Route path="/" element={<AppBar />}> */}
           <Route
             element={
               <PublicRoute redirectTo="/contacts" restricted>
@@ -74,13 +66,10 @@ export default function App() {
               </RequireAuth>
             }
           />
-          {/* </Route> */}
-          {/* <Route path="*" element={<AppBar />}> */}
           <Route
             path="*"
             element={isLoggedIn ? <ContactsView /> : <HomeView />}
           />
-          {/* </Route> */}
         </Routes>
       </Suspense>
       <ToastContainer autoClose={3000} theme={'colored'} />

@@ -3,10 +3,7 @@ import {
   useEditContactMutation,
 } from '../../redux/contacts/contacts-reducer';
 import { useState } from 'react';
-import { ImBin2 } from 'react-icons/im';
-// import { IoTrashBinOutline } from 'react-icons/io5';
-import { ImPencil } from 'react-icons/im';
-import { ImCheckmark } from 'react-icons/im';
+import { ImBin2, ImPencil, ImCheckmark } from 'react-icons/im';
 import { BallTriangle } from 'react-loader-spinner';
 import PropTypes from 'prop-types';
 import styles from './ContactsList.module.css';
@@ -49,18 +46,24 @@ export default function ContactsListItem({ contactId, name, phoneNumber }) {
         ) : (
           <>
             <input
+              className={styles.input}
               name="name"
               value={contactName}
               onChange={e => setContactName(e.target.value)}
             />
             <input
+              className={styles.input}
               type="tel"
               name="phone"
               value={contactNumber}
               autoFocus
               onChange={e => setContactNumber(e.target.value)}
             />
-            <button type="button" onClick={() => editHandler()}>
+            <button
+              className={styles.button}
+              type="button"
+              onClick={() => editHandler()}
+            >
               <ImCheckmark />
             </button>
           </>
